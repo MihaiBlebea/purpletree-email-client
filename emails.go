@@ -6,9 +6,9 @@ const (
 	ConfirmEmail    string = "confirm-email"
 	ConfirmPassword string = "confirm-password"
 	Contact         string = "contact"
-	AdminContact    string = "admin-contact"
+	AdminContact    string = "contact-admin"
 	Payment         string = "payment"
-	AdminPayment    string = "admin-payment"
+	AdminPayment    string = "payment-admin"
 )
 
 // Subject template constants
