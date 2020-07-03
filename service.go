@@ -31,6 +31,7 @@ func (s *service) Send(alias string, payload map[string]interface{}) (*SendTrans
 	var response SendTransactionlEmailResponse
 	request := SendTransactionlEmailRequest{Alias: alias, Payload: payload}
 	err = client.Call("RPC.SendEmail", request, &response)
+	s.logger.Infof("RPC response %v", response)
 	if err != nil {
 		return &SendTransactionlEmailResponse{}, err
 	}
