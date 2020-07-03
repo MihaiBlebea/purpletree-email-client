@@ -12,23 +12,18 @@ type Service interface {
 }
 
 type service struct {
-	discoverService DiscoverService
-	logger          *logrus.Logger
+	address string
+	logger  *logrus.Logger
 }
 
 // New returns a new service
-func New(discoverService DiscoverService, logger *logrus.Logger) Service {
-	return &service{discoverService, logger}
+func New(address string, logger *logrus.Logger) Service {
+	return &service{address, logger}
 }
 
 // Send sends an email to the microservice
 func (s *service) Send(alias string, payload map[string]interface{}) (*SendTransactionlEmailResponse, error) {
-	address, err := s.discoverService.GetService("/services/email")
-	if err != nil {
-		return &SendTransactionlEmailResponse{}, err
-	}
-
-	client, err := rpc.DialHTTP("tcp", address)
+	client, err := rpc.DialHTTP("tcp", s.address)
 	if err != nil {
 		return &SendTransactionlEmailResponse{}, err
 	}
